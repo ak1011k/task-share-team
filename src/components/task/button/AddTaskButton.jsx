@@ -1,0 +1,25 @@
+import React from "react";
+import { v4 as uuid } from "uuid";
+
+export const AddTaskButton = ({ taskCardsList, setTaskCardsList }) => {
+  const addTaskCard = () => {
+    const taskCardId = uuid();
+    setTaskCardsList([
+      ...taskCardsList,
+      {
+        id: taskCardId,
+        draggabeleId: `item${taskCardId}`,
+      },
+    ]);
+  };
+  return (
+    <div className="ml-[1%] mt-[25px]">
+      <button
+        className="w-[50px] h-[50px] ml-1 rounded-[9999px] text-[30px] bg-white shadow-lg cursor-pointer hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
+        onClick={addTaskCard}
+      >
+        +
+      </button>
+    </div>
+  );
+};
