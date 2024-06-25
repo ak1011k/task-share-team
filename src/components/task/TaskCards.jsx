@@ -1,51 +1,54 @@
 import React, { useState } from "react";
-import { TaskCard } from "./TaskCard";
-import { AddTaskButton } from "./button/AddTaskButton";
-import { DndContext, closestCenter } from "@dnd-kit/core";
-import {
-  SortableContext,
-  horizontalListSortingStrategy,
-  arrayMove,
-} from "@dnd-kit/sortable";
+import { TaskCard } from "./TaskCard.jsx";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { AddTaskCardButton } from "./button/AddTaskButton";
+
+const reorder = (taskCardsList, startIndex, endIndex) => {
+  //タスクを並び変える。
+  const remove = taskCardsList.splice(startIndex, 1); //[2,3]
+  taskCardsList.splice(endIndex, 0, remove[0]); //[2,1,3]
+};
 
 export const TaskCards = () => {
   const [taskCardsList, setTaskCardsList] = useState([
-    { id: "0", draggableId: "item0" },
+    {
+      id: "0",
+      draggableId: "item0",
+    },
   ]);
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setTaskCardsList((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
+  const handleDragEnd = (result) => {
+    reorder(taskCardsList, result.source.index, result.destination.index);
+
+    setTaskCardsList(taskCardsList);
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext
-        items={taskCardsList.map((card) => card.id)}
-        strategy={horizontalListSortingStrategy}
-      >
-        <div className="flex justify-start items-start flex-wrap">
-          {taskCardsList.map((taskCard, index) => (
-            <TaskCard
-              key={taskCard.id}
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="droppable" direction="horizontal">
+        {(provided) => (
+          <div
+            className="flex justify-start items-start flex-wrap"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {taskCardsList.map((taskCard, index) => (
+              <TaskCard
+                key={taskCard.id}
+                index={index}
+                taskCardsList={taskCardsList}
+                setTaskCardsList={setTaskCardsList}
+                taskCard={taskCard}
+              />
+            ))}
+            {provided.placeholder}
+            <AddTaskCardButton
               taskCardsList={taskCardsList}
               setTaskCardsList={setTaskCardsList}
-              taskCard={taskCard}
-              index={index}
             />
-          ))}
-          <AddTaskButton
-            taskCardsList={taskCardsList}
-            setTaskCardsList={setTaskCardsList}
-          />
-        </div>
-      </SortableContext>
-    </DndContext>
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };

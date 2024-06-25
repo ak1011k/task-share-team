@@ -1,69 +1,40 @@
 import React from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Task } from "./Task";
-import { DndContext, closestCenter } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-  useSortable,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
-const SortableTask = ({ task, setTaskList, taskList, index }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: task.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <Task
-      task={task}
-      setTaskList={setTaskList}
-      taskList={taskList}
-      index={index}
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-    />
-  );
+const reorder = (taskList, startIndex, endIndex) => {
+  //タスクを並び変える。
+  const remove = taskList.splice(startIndex, 1); //[2,3]
+  taskList.splice(endIndex, 0, remove[0]); //[2,1,3]
 };
 
-export const Tasks = ({ taskList = [], setTaskList = () => {} }) => {
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setTaskList((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+export const Tasks = ({ taskList, setTaskList }) => {
+  const handleDrangEnd = (result) => {
+    reorder(taskList, result.source.index, result.destination.index);
 
-        const newItems = [...items];
-        const [reorderedItem] = newItems.splice(oldIndex, 1);
-        newItems.splice(newIndex, 0, reorderedItem);
-
-        return newItems;
-      });
-    }
+    setTaskList(taskList);
   };
-
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext
-        items={taskList.map((task) => task.id)}
-        strategy={verticalListSortingStrategy}
-      >
-        {taskList.map((task, index) => (
-          <SortableTask
-            key={task.id}
-            task={task}
-            taskList={taskList}
-            setTaskList={setTaskList}
-            index={index}
-          />
-        ))}
-      </SortableContext>
-    </DndContext>
+    <div>
+      <DragDropContext onDragEnd={handleDrangEnd}>
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {taskList.map((task, index) => (
+                <div key={task.id}>
+                  <Task
+                    index={index}
+                    task={task}
+                    taskList={taskList}
+                    setTaskList={setTaskList}
+                  />
+                </div>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
 };

@@ -13,28 +13,28 @@ export const TaskAddInput = ({
     if (inputText === "") {
       return;
     }
-
+    //カードを追加する。
     setTaskList([
       ...taskList,
       {
-        text: inputText,
         id: taskId,
         draggableId: `task-${taskId}`,
+        text: inputText,
       },
     ]);
     setInputText("");
   };
+
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          className="w-[100%] text-[1.3rem] p-2 rounded-md border-none outline-none"
           type="text"
-          placeholder="add task"
+          placeholder="add a task"
+          className="taskAddInput"
           onChange={handleChange}
           value={inputText}
         />
