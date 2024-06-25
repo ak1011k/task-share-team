@@ -5,8 +5,8 @@ import { AddTaskCardButton } from "./button/AddTaskButton";
 
 const reorder = (taskCardsList, startIndex, endIndex) => {
   //タスクを並び変える。
-  const remove = taskCardsList.splice(startIndex, 1); //[2,3]
-  taskCardsList.splice(endIndex, 0, remove[0]); //[2,1,3]
+  const remove = taskCardsList.splice(startIndex, 1);
+  taskCardsList.splice(endIndex, 0, remove[0]);
 };
 
 export const TaskCards = () => {

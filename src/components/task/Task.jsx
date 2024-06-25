@@ -10,7 +10,7 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
     <Draggable index={index} draggableId={task.draggableId}>
       {(provided) => (
         <div
-          className="flex items-center justify-between p-[17px] bg-white mt-[10px] rounded-md shadow-[1px,1px,1px,rgb(75,75,75)]"
+          className="flex items-center justify-between p-[17px] bg-white mt-[10px] rounded-md shadow-[1px,1px,1px,rgb(75,75,75)] border border-gray-500"
           key={task.id}
           ref={provided.innerRef}
           {...provided.draggableProps}

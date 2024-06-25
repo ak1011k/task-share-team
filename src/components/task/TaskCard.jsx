@@ -13,11 +13,12 @@ export const TaskCard = ({
 }) => {
   const [inputText, setInputText] = useState("");
   const [taskList, setTaskList] = useState([]);
+
   return (
     <Draggable draggableId={taskCard.id} index={index}>
       {(provided) => (
         <div
-          className="w-[250px] p-2 m-2 bg-blue-200 rounded-md"
+          className="w-[250px] p-2 m-2 bg-white rounded-md"
           ref={provided.innerRef}
           {...provided.draggableProps}
         >

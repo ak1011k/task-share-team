@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const TaskCardTitle = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState("Date");
+  const [title, setTitle] = useState("Name");
 
   const handleTitleClick = () => {
     setIsEditing(true);
@@ -15,25 +15,26 @@ export const TaskCardTitle = () => {
   const handleTitleBlur = () => {
     setIsEditing(false);
   };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      setIsEditing(false);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
   };
 
   return (
     <div className="w-full overflow-hidden">
       {isEditing ? (
-        <input
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-          onBlur={handleTitleBlur}
-          onKeyDown={handleKeyDown}
-          className="w-full bg-transparent border-none text-xl font-bold focus:outline-none whitespace-nowrap overflow-x-auto"
-          autoFocus
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="input Name"
+            value={title}
+            onChange={handleTitleChange}
+            onBlur={handleTitleBlur}
+            maxLength="15"
+            className="w-full bg-transparent border-none text-xl font-bold focus:outline-none whitespace-nowrap overflow-x-auto"
+            autoFocus
+          />
+        </form>
       ) : (
         <h3
           onClick={handleTitleClick}

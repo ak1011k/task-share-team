@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import { FaCrown } from "react-icons/fa";
 
 export const TaskAddInput = ({
   inputText,
@@ -33,12 +34,13 @@ export const TaskAddInput = ({
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="add a task"
-          className="taskAddInput"
+          placeholder="add task"
+          className="border-black border rounded-md pl-4 "
           onChange={handleChange}
           value={inputText}
         />
       </form>
+      <FaCrown className="mt-1 pt-1 ml-[10px]" />
     </div>
   );
 };
