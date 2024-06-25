@@ -3,7 +3,9 @@ import React from "react";
 export const Date = () => {
   return (
     <div>
-      <h1 className="m-3 font-bold text-[35px]">Today</h1>
+      <div className="text-white text-5xl ml-2 font-bold italic underline">
+        <span className="stroke-text">Today</span>
+      </div>
     </div>
   );
 };
