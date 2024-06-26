@@ -5,7 +5,7 @@ import { TaskCards } from "./components/task/TaskCards";
 
 function App() {
   return (
-    <div className="bg-[url('src/images/sky.jpg')] min-h-[100vh] bg-repeat">
+    <div className="bg-[url('src/images/wood.jpg')] min-h-[100vh] bg-repeat">
       <Header />
       <Date />
       <TaskCards />
