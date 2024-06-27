@@ -4,10 +4,15 @@ import { Date } from "./Date";
 export const Header = () => {
   return (
     <div>
-      <header className="text-center bg-gradient-to-bl from-gray-400  via-white to-pink-300-200 p-2 mb-5 ">
-        <h1 className=" text-lg font-bold text-gray-600 drop-shadow-lg ">
+      <header className="flex items-center justify-center bg-white p-3">
+        <h1 className="text-lg font-bold text-gray-600 drop-shadow-lg mr-3">
           Team Tasks
         </h1>
+        <img
+          src="src/images/note.png"
+          alt="ノート"
+          className="w-[30px] h-[40px]"
+        ></img>
       </header>
     </div>
   );

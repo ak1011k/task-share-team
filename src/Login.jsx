@@ -12,9 +12,9 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[url('src/images/wood.jpg')] min-h-[100vh] bg-repeat">
+    <div className="bg-[url('src/images/back.jpg')] min-h-[100vh] bg-repeat ">
       <Header />
-      <div className="w-full max-w-md mx-auto border rounded-lg p-6 shadow-md bg-gray-50">
+      <div className="w-full max-w-md mx-auto border rounded-lg p-6 shadow-md bg-gray-50 mt-6">
         <h2 className="text-2xl font-bold mb-4 italic">Input Project Name</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
