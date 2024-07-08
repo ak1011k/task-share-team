@@ -14,7 +14,6 @@ export const TaskAddInput = ({
     if (inputText === "") {
       return;
     }
-    //カードを追加する。
     setTaskList([
       ...taskList,
       {
@@ -34,8 +33,8 @@ export const TaskAddInput = ({
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="add task"
-          className="border-black border rounded-md pl-4 "
+          placeholder="タスクを入力"
+          className="border-black border rounded-md pl-1 "
           onChange={handleChange}
           value={inputText}
         />

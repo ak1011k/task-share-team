@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const TaskCardTitle = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState("Name");
+  const [title, setTitle] = useState("なまえ");
 
   const handleTitleClick = () => {
     setIsEditing(true);
@@ -26,7 +26,7 @@ export const TaskCardTitle = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="input Name"
+            placeholder="なまえをにゅうりょく"
             value={title}
             onChange={handleTitleChange}
             onBlur={handleTitleBlur}

@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 export const AddTaskCardButton = ({ taskCardsList, setTaskCardsList }) => {
   const addTaskCard = () => {
     const taskCardId = uuid();
-    /* タスクカードを追加する。 */
+    
     setTaskCardsList([
       ...taskCardsList,
       {

@@ -6,7 +6,7 @@ export const Header = () => {
     <div>
       <header className="flex items-center justify-center bg-white p-3">
         <h1 className="text-lg font-bold text-gray-600 drop-shadow-lg mr-3">
-          Team Tasks
+          タスクしぇあ
         </h1>
         <img
           src="src/images/note.png"
